@@ -1,12 +1,14 @@
 #!/bin/bash
 
-FILE="/etc/resolv.conf"
+FILE="./test.txt"
+#"/etc/resolv.conf"
 
 find_or_append () {
     if grep -q -x "$*" "$FILE"; then
         echo "$*" '- was already' 
     else
         echo "$*" >> $FILE
+        echo "$*" '- append' 
     fi
 }
 
@@ -18,7 +20,7 @@ if [ $# -eq 0 ]
 
     for LINE in "${LINES[@]}"
     do
-        echo "$LINE"
+        
         find_or_append $LINE
     done
     
