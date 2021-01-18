@@ -18,11 +18,11 @@ while getopts ":p:" opt; do
       FILE="$OPTARG"
       ;;
     \?)
-      echo "[ INVALID -$OPTARG]: only '-p' is expected or no arguments with default value" >&2
+      echo "[ INVALID -$OPTARG]: only '-p' is expected or no arguments with default value"
       exit 1
       ;;
     :)
-      echo "Option -$OPTARG requires an argument." >&2
+      echo "Option -$OPTARG requires an argument."
       exit 1
       ;;
   esac
@@ -30,17 +30,10 @@ done
 
 chmod 777 $FILE
 
-if [ $# -eq 0 ]
-  then
-    declare -a LINES=('nameserver 81.19.73.11' 'nameserver 81.19.83.11' 'nameserver 192.168.1.254')
+declare -a LINES=('nameserver 81.19.73.11' 'nameserver 81.19.83.11' 'nameserver 192.168.1.254')
 
-    for LINE in "${LINES[@]}"
-    do
-        find_or_append $LINE
-    done
+for LINE in "${LINES[@]}"; do
+  find_or_append $LINE
+done
     
-  else
-    find_or_append $#
-fi
-
 chmod -r-- $FILE
