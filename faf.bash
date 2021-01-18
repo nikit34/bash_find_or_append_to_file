@@ -28,7 +28,7 @@ while getopts ":p:" opt; do
   esac
 done
 
-chmod o+x $FILE
+chmod 777 $FILE
 
 if [ $# -eq 0 ]
   then
