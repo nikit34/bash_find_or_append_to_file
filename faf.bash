@@ -1,8 +1,6 @@
 #!/bin/bash
 
-FILE="./test.txt"
-#"/etc/resolv.conf"
-
+FILE="/etc/resolv.conf"
 
 find_or_append () {
     if grep -q -x "$*" "$FILE"; then
@@ -16,13 +14,14 @@ chmod o+x $FILE
 
 if [ $# -eq 0 ]
   then
-    LINE_1='nameserver 81.19.73.11'
-    LINE_2='nameserver 81.19.83.11'
-    LINE_3='nameserver 192.168.1.254'
+    declare -a LINES=('nameserver 81.19.73.11' 'nameserver 81.19.83.11' 'nameserver 192.168.1.254')
+
+    for LINE in "${LINES[@]}"
+    do
+        echo "$LINE"
+        find_or_append $LINE
+    done
     
-    find_or_append $LINE_1
-    find_or_append $LINE_2
-    find_or_append $LINE_3
   else
     find_or_append $#
 fi
