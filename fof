@@ -1,7 +1,6 @@
 #!/bin/bash
 
 FILE="./test.txt"
-#"/etc/resolv.conf"
 
 find_or_append () {
     if grep -q -x "$*" "$FILE"; then
