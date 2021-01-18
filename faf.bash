@@ -12,6 +12,22 @@ find_or_append () {
     fi
 }
 
+while getopts ":p:" opt; do
+  case $opt in
+    p)
+      FILE="$OPTARG"
+      ;;
+    \?)
+      echo "[ INVALID -$OPTARG]: only '-p' is expected or no arguments with default value" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
 chmod o+x $FILE
 
 if [ $# -eq 0 ]
@@ -20,7 +36,6 @@ if [ $# -eq 0 ]
 
     for LINE in "${LINES[@]}"
     do
-        
         find_or_append $LINE
     done
     
